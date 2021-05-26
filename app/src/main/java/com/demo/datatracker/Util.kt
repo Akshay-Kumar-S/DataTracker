@@ -1,17 +1,12 @@
 package com.demo.datatracker
 
-import android.app.usage.NetworkStats
-import android.app.usage.NetworkStatsManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.telephony.TelephonyManager
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 object Util {
     private val TAG = "dataTracker"
@@ -45,8 +40,8 @@ object Util {
 
     fun getStartTime(): Long {
         val date = Calendar.getInstance()
-        date.set(Calendar.HOUR_OF_DAY, 19)
-        date.set(Calendar.MINUTE, 40)
+        date.set(Calendar.HOUR_OF_DAY, 0)
+        date.set(Calendar.MINUTE, 0)
         date.set(Calendar.SECOND, 0)
         date.set(Calendar.MILLISECOND, 0)
         return date.timeInMillis
@@ -54,10 +49,10 @@ object Util {
 
     fun getEndTime(): Long {
         val date = Calendar.getInstance()
-        date.set(Calendar.HOUR_OF_DAY, 19)
-        date.set(Calendar.MINUTE, 50)
-        date.set(Calendar.SECOND, 23)
-        date.set(Calendar.MILLISECOND, 430)
+        date.set(Calendar.HOUR_OF_DAY, 0)
+        date.set(Calendar.MINUTE, 0)
+        date.set(Calendar.SECOND, 0)
+        date.set(Calendar.MILLISECOND, 0)
         return date.timeInMillis
     }
 

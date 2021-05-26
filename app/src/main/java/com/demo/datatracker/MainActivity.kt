@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
         askPermissions()
         //TODO test one by one cases. check logcat for logs with TAG = dataTracker
         DataUsageTest.case1()
-        DataUsageTest.case2()
-        DataUsageTest.case3()
+//        DataUsageTest.case2()
+//        DataUsageTest.case3()
     }
 
     private fun askPermissions() {

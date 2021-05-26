@@ -41,6 +41,7 @@ object DataUsageTest {
         val uid =
             Util.getUid("com.android.vending")    //TODO update package name as your wish. Try different apps.
         StatsQuery.findAppDataUsage(App.getInstance(), queryConfig, uid)
+        queryConfig.timePeriod = TimePeriod(currentBucketTime.startTime, currentBucketTime.endTime)
         StatsQuery.queryUsageForUid(App.getInstance(), queryConfig, uid)
     }
 
@@ -78,6 +79,7 @@ object DataUsageTest {
         val uid =
             Util.getUid("com.android.vending")    //TODO update package name as your wish. Try different apps.
         StatsQuery.findAppDataUsage(App.getInstance(), queryConfig, uid)
+        queryConfig.timePeriod = TimePeriod(bucketTime.startTime, bucketTime.endTime)
         StatsQuery.queryUsageForUid(App.getInstance(), queryConfig, uid)
     }
 
@@ -104,7 +106,7 @@ object DataUsageTest {
      *  @see Util.getEndTime use this two methods to give different start and end time
      */
     fun case3() {
-        Log.e(TAG, "***************Case2***************")
+        Log.e(TAG, "***************Case3***************")
         val queryConfig =
             QueryConfig(NetworkCapabilities.TRANSPORT_CELLULAR) //TODO update networkType here
         val currentBucketTime = StatsQuery.getBucketTime()
@@ -116,10 +118,7 @@ object DataUsageTest {
         //TODO update start time and end time.
         //Condition: currentBucket startTime >= startTime > endTime <= currentBucket endTime
         //You can use any start and end time, but working on current bucket start and end time is easy to understand.
-        queryConfig.timePeriod = TimePeriod(
-            Util.getStartTime(),
-            Util.getEndTime()
-        )    //TODO update package name as your wish. Try different apps.
+        queryConfig.timePeriod = TimePeriod(Util.getStartTime(), Util.getEndTime())
         val appsDataUsage = StatsQuery.findAppDataUsage(App.getInstance(), queryConfig, 0)
         val deviceDataUsage = StatsQuery.findDeviceDataUsage(App.getInstance(), queryConfig)
         Log.d(TAG, "Total apps data usage")

@@ -3,7 +3,6 @@ package com.demo.datatracker
 import android.app.usage.NetworkStats
 import android.app.usage.NetworkStatsManager
 import android.content.Context
-import android.os.Build
 import android.os.RemoteException
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +18,6 @@ object StatsQuery {
      * @return
      */
     private fun findAggregationTime(): Long {
-        Log.d(TAG, "findAggregationTime: ")
         val nsm = App.getInstance()
             .getSystemService(AppCompatActivity.NETWORK_STATS_SERVICE) as NetworkStatsManager
         var aggregationTime: Long = -1
@@ -35,7 +33,7 @@ object StatsQuery {
 
             val bucket = NetworkStats.Bucket()
             if (networkStats.hasNextBucket()) {
-                Log.d(TAG, "findAggregationTime: " + Util.getDateDefault(bucket.startTimeStamp))
+                //Log.d(TAG, "findAggregationTime: " + Util.getDateDefault(bucket.startTimeStamp))
                 networkStats.getNextBucket(bucket)
                 aggregationTime = bucket.startTimeStamp
                 networkStats.close()
@@ -61,7 +59,6 @@ object StatsQuery {
      * @return bucket start time and endTime
      */
     fun getBucketTime(time: Long = System.currentTimeMillis()): TimePeriod {
-        Log.d(TAG, "getLastAggregatedTime: ")
         val aggregationTime = findAggregationTime()
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = time
@@ -86,7 +83,7 @@ object StatsQuery {
             }
         } else {
             Log.d(TAG, "getLastAggregatedTime: else ")
-        //not handling this case for now.
+            //not handling this case for now.
         }
         return TimePeriod(calendar.timeInMillis, calendar.timeInMillis + TimeUnit.HOURS.toMillis(2))
     }
@@ -98,7 +95,7 @@ object StatsQuery {
     fun findAppDataUsage(
         ctx: Context, queryConfig: QueryConfig, uid: Int
     ): MutableMap<Int, DataUsage> {
-        Log.e(TAG, "findAppDataUsage: ")
+        Log.d(TAG, "AppDataUsage using querySummary: ")
         val networkStatsManager =
             ctx.getSystemService(AppCompatActivity.NETWORK_STATS_SERVICE) as NetworkStatsManager
         val networkStats: NetworkStats
@@ -136,7 +133,7 @@ object StatsQuery {
     }
 
     fun queryUsageForUid(ctx: Context, queryConfig: QueryConfig, uid: Int) {
-        Log.e(TAG, "findAppDataUsage: ")
+        Log.d(TAG, "app data usage using queryDetailsForUid: ")
         val networkStatsManager =
             ctx.getSystemService(AppCompatActivity.NETWORK_STATS_SERVICE) as NetworkStatsManager
         val networkStats: NetworkStats
@@ -160,7 +157,6 @@ object StatsQuery {
     }
 
     fun findDeviceDataUsage(ctx: Context, queryConfig: QueryConfig): DataUsage {
-        Log.d(TAG, "findDeviceDataUsage: ")
         val networkStatsManager =
             ctx.getSystemService(AppCompatActivity.NETWORK_STATS_SERVICE) as NetworkStatsManager
         val bucket: NetworkStats.Bucket = networkStatsManager.querySummaryForDevice(

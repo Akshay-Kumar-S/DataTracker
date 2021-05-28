@@ -109,12 +109,6 @@ object DataUsageTest {
         Log.e(TAG, "***************Case3***************")
         val queryConfig =
             QueryConfig(NetworkCapabilities.TRANSPORT_CELLULAR) //TODO update networkType here
-        val currentBucketTime = StatsQuery.getBucketTime()
-        Log.d(
-            TAG, "current bucket " +
-                    "startTime: ${Util.getDateDefault(currentBucketTime.startTime)} " +
-                    "endTime: ${Util.getDateDefault(currentBucketTime.endTime)}"
-        )
         //TODO update start time and end time.
         //Condition: currentBucket startTime >= startTime > endTime <= currentBucket endTime
         //You can use any start and end time, but working on current bucket start and end time is easy to understand.
